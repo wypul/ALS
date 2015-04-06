@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="fieldLatitude" type="id" />
+    <item name="fieldLongitude" type="id" />
+    <item name="fieldCountry" type="id" />
+</resources>

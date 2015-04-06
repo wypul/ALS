@@ -1,0 +1,2 @@
+/home/vipul/AndroidStudioProjects/ALS/app/build/intermediates/classes/debug
+/home/vipul/AndroidStudioProjects/ALS/app/build/intermediates/pre-dexed/debug/support-v4-18.0.0-27266d6a5fdf347fb6ce57f4c45c52e53bdaa3f3.jar

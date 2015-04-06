@@ -1,0 +1,18 @@
+<!-- @drawable/backrepeat - refers to the image - check backrepeat.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/backrepeat" >
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:text="By Vidur, Vipul"
+        android:textColor="#454545"
+        android:textSize="12sp" />
+
+</RelativeLayout>
