@@ -1,10 +1,16 @@
 package com.pavan.slidingmenu;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.widget.Toast;
 
 public class MyService extends Service {
+    public PendingIntent pendingIntent;
+    public AlarmManager manager;
+
     public MyService() {
     }
 
@@ -23,25 +29,19 @@ public class MyService extends Service {
 
     @Override
     public void onStart(Intent intent, int startId) {
-        // For time consuming an long tasks you can launch a new thread here...
-        GPSTracker gps = new GPSTracker(this);
-        if(gps.canGetLocation()){
-            double latitude = gps.getLatitude();
-            double longitude = gps.getLongitude();
-            // \n is for new line
+        // For time consuming an long tasks yo
+        // u can launch a new thread here...
+        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+        startAlarm();
+    }
 
+    public void startAlarm() {
+        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        int interval = 10000;
 
-
-            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-
-
-
-        }else{
-            // can't get location
-            // GPS or Network is not enabled
-            // Ask user to enable GPS/network in settings
-            gps.showSettingsAlert();
-        }
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+        Toast.makeText(this, "All Set", Toast.LENGTH_SHORT).show();
     }
 
     @Override

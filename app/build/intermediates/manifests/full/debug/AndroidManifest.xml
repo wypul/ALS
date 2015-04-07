@@ -48,6 +48,9 @@
             android:enabled="true"
             android:exported="true" >
         </service>
+
+        <receiver android:name="com.pavan.slidingmenu.AlarmReceiver" >
+        </receiver>
     </application>
 
 </manifest>

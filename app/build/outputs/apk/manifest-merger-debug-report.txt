@@ -89,3 +89,7 @@ ADDED from AndroidManifest.xml:45:9
 		ADDED from AndroidManifest.xml:46:13
 	android:name
 		ADDED from AndroidManifest.xml:45:18
+receiver#com.pavan.slidingmenu.AlarmReceiver
+ADDED from AndroidManifest.xml:49:9
+	android:name
+		ADDED from AndroidManifest.xml:49:19
