@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
 		Fragment fragment = null;
 		switch (position) {
 		case 0:
-			fragment = new GP_Fragment();
+			fragment = new FB_Fragment();
 			break;
 		case 1:
 			fragment = new GP_Fragment();

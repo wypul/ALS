@@ -1,34 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:weightSum="1">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="148dp"
-        android:src="@drawable/tb" />
-
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="vidur"
-        android:id="@+id/textView"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_weight="0.23"
+        android:width="100dp"
+        android:id="@+id/time" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.23"
+        android:width="100dp"
+        android:layout_toRightOf="@id/time"
+        android:id="@+id/day" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.23"
+        android:width="100dp"
+        android:layout_below="@+id/time"
+        android:id="@+id/sub1" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.23"
+        android:width="100dp"
+        android:layout_below="@+id/sub1"
+        android:id="@+id/sub2" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.23"
+        android:width="100dp"
+        android:layout_below="@+id/sub2"
+        android:id="@+id/sub3" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.23"
+        android:width="100dp"
+        android:layout_below="@+id/sub3"
+        android:id="@+id/sub4" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.23"
+        android:width="100dp"
+        android:layout_below="@+id/sub4"
+        android:id="@+id/sub5" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.23"
+        android:width="100dp"
+        android:layout_below="@+id/sub5"
+        android:id="@+id/sub6" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.23"
+        android:width="100dp"
+        android:layout_below="@+id/sub6"
+        android:id="@+id/sub7" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/kkk"
-        android:layout_above="@+id/textView"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
+        android:text="Save"
+        android:width="100dp"
+        android:layout_below="@+id/sub7"
+        android:id="@+id/save"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/save"
+        android:id="@+id/view" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show"
+        android:width="100dp"
+        android:layout_below="@+id/view"
+        android:id="@+id/show"/>
 
-</RelativeLayout><!-- From: file:/home/vipul/AndroidStudioProjects/ALS/app/src/main/res/layout/gp_fragment.xml -->
+</RelativeLayout>
+<!-- From: file:/home/vipul/AndroidStudioProjects/ALS/app/src/main/res/layout/gp_fragment.xml -->
