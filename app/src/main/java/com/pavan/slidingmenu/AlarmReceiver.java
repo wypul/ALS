@@ -22,7 +22,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
 
-            Toast.makeText(arg0, "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            //Toast.makeText(arg0, "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
 
 
         }else{

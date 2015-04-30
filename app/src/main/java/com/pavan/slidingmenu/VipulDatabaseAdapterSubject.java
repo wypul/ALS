@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -52,6 +53,40 @@ public class VipulDatabaseAdapterSubject extends Activity{
         return arrayList;
     }
 
+    public String getPresent(String subject){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String present=null;
+        String[] columns = {VipulHelper.SUBJECT, VipulHelper.PRESENT};
+        Cursor cursor = db.query(VipulHelper.TABLE_NAME,columns,VipulHelper.SUBJECT+" = '"+subject+"'",null,null,null,null);
+        while (cursor.moveToNext()){
+            int index = cursor.getColumnIndex(VipulHelper.PRESENT);
+            present = cursor.getString(index);
+        }
+        return present;
+    }
+
+    public String getAbsent(String subject){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String absent=null;
+        String[] columns = {VipulHelper.SUBJECT, VipulHelper.ABSENT};
+        Cursor cursor = db.query(VipulHelper.TABLE_NAME,columns,VipulHelper.SUBJECT+" = '"+subject+"'",null,null,null,null);
+        while (cursor.moveToNext()){
+            int index = cursor.getColumnIndex(VipulHelper.ABSENT);
+            absent = cursor.getString(index);
+        }
+        return absent;
+    }
+
+    public int updatePresent(String present, String subject){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(VipulHelper.PRESENT, present);
+        String[] whereArgs = {subject};
+        int count = db.update(VipulHelper.TABLE_NAME,contentValues,VipulHelper.SUBJECT+" =?",whereArgs);
+        Toast.makeText(getApplicationContext(),"updatePresent",Toast.LENGTH_SHORT).show();
+        return count;
+    }
+
 
     static class VipulHelper extends SQLiteOpenHelper {
 
@@ -78,7 +113,7 @@ public class VipulDatabaseAdapterSubject extends Activity{
         public void onCreate(SQLiteDatabase db) {
             try{
                 db.execSQL(CREATE_TABLE);
-                Message.message(context,"oncreate called");
+                //Message.message(context,"oncreate called");
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -88,7 +123,7 @@ public class VipulDatabaseAdapterSubject extends Activity{
         public void onUpgrade(SQLiteDatabase db, int i, int i2) {
             try {
                 db.execSQL(DROP_TABLE);
-                Message.message(context,"onupgrade called");
+               // Message.message(context,"onupgrade called");
                 onCreate(db);
             }catch (Exception e){
                 e.printStackTrace();

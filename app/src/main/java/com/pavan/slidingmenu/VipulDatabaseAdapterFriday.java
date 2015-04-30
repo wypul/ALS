@@ -60,7 +60,7 @@ public class VipulDatabaseAdapterFriday {
         private static final String ROOM_NO = "room_no";
         private static final String SUBJECT = "subject";
         private static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+" ("+UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+ROOM_NO+" VARCHAR(255), "+SUBJECT+" VARCHAR(255));";
-        private static final String DROP_TABLE = "DROP TABLE IF EXISTS" + TABLE_NAME ;
+        private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME ;
         private Context context;
 
         public VipulHelper(Context context) {

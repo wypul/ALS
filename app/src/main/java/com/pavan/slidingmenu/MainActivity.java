@@ -127,10 +127,14 @@ public class MainActivity extends Activity {
         // 0000000000000000000
 
         startNewService();
+		startNewService1();
 
     }
 
-    public void startNewService(){
+	private void startNewService1() { startService(new Intent(this,MyService1.class));
+	}
+
+	public void startNewService(){
         startService(new Intent(this,MyService.class));
     }
 
@@ -148,10 +152,10 @@ public class MainActivity extends Activity {
 		Fragment fragment = null;
 		switch (position) {
 		case 0:
-			fragment = new FB_Fragment();
+			fragment = new GP_Fragment();
 			break;
 		case 1:
-			fragment = new GP_Fragment();
+			fragment = new FB_Fragment();
 			break;
 		/*case 2:
 			fragment = new FB_Fragment();

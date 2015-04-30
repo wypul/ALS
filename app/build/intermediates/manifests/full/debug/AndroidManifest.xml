@@ -42,14 +42,30 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.pavan.slidingmenu.Report"
+            android:label="@string/title_activity_report" >
+            <intent-filter>
+                <action android:name="com.pavan.slidingmenu.REPORT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name="com.pavan.slidingmenu.MyService"
             android:enabled="true"
             android:exported="true" >
         </service>
+        <service
+            android:name="com.pavan.slidingmenu.MyService1"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
 
         <receiver android:name="com.pavan.slidingmenu.AlarmReceiver" >
+        </receiver>
+        <receiver android:name="com.pavan.slidingmenu.AlarmReceiver1" >
         </receiver>
     </application>
 

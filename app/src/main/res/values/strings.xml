@@ -32,5 +32,15 @@
     <string name="GPSAlertDialogMessage" />
     <string name="settings" />
     <string name="cancel" />
+    <string name="title_activity_report" />
+
+    <string-array name="location_array">
+        <item>B-block</item>
+        <item>C-block</item>
+        <item>D-block</item>
+        <item>E-block</item>
+        <item>F-block</item>
+    </string-array>
+
 
 </resources>

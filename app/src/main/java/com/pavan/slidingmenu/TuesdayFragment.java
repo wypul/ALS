@@ -5,55 +5,156 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.pavan.slidingmenu.slidelist.GP_Fragment;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
- * Created by vipul on 28/3/15.
+ * Created by vipul on 25/3/15.
  */
 public class TuesdayFragment extends Fragment {
-    VipulDatabaseAdapterTuesday vipulHelper;
-    Button save;
-    EditText tl[] = new EditText[20];
-    EditText ts[] = new EditText[20];
-    ArrayList arrayList;
-    Iterator itr;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    VipulDatabaseAdapterTuesday vipulHelper;
+    VipulDatabaseAdapterSubject vipulSubject;
+    GP_Fragment gp_fragment;
+    Button save,view;
+    Spinner sub_spinner[] = new Spinner[20];
+    Spinner location[] = new Spinner[20];
+    public ArrayList arrayList,subjectList;
+    public String sub_selected[] = new String[20];
+    public String location_selected[] = new String[20];
+    Iterator itr,itrSub;
+    final List<String> list=new ArrayList<String>();
+    final List<String> location_list=new ArrayList<String>();
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.tuesday_layout, container, false);
         vipulHelper = new VipulDatabaseAdapterTuesday(getActivity().getApplicationContext());
         vipulHelper.initialize();
-        save = (Button) v.findViewById(R.id.tuessave);
-        tl[0] = (EditText) v.findViewById(R.id.tl8);
-        tl[1] = (EditText) v.findViewById(R.id.tl9);
-        tl[2] = (EditText) v.findViewById(R.id.tl10);
-        tl[3] = (EditText) v.findViewById(R.id.tl11);
-        tl[4] = (EditText) v.findViewById(R.id.tl12);
-        tl[5] = (EditText) v.findViewById(R.id.tl1);
-        tl[6] = (EditText) v.findViewById(R.id.tl2);
-        tl[7] = (EditText) v.findViewById(R.id.tl3);
-        tl[8] = (EditText) v.findViewById(R.id.tl4);
-        ts[0] = (EditText) v.findViewById(R.id.ts8);
-        ts[1] = (EditText) v.findViewById(R.id.ts9);
-        ts[2] = (EditText) v.findViewById(R.id.ts10);
-        ts[3] = (EditText) v.findViewById(R.id.ts11);
-        ts[4] = (EditText) v.findViewById(R.id.ts12);
-        ts[5] = (EditText) v.findViewById(R.id.ts1);
-        ts[6] = (EditText) v.findViewById(R.id.ts2);
-        ts[7] = (EditText) v.findViewById(R.id.ts3);
-        ts[8] = (EditText) v.findViewById(R.id.ts4);
+        vipulSubject = new VipulDatabaseAdapterSubject(getActivity().getApplicationContext());
+        list.clear();
+        location_list.clear();
+        save = (Button) v.findViewById(R.id.save);
+
+        location[0] = (Spinner) v.findViewById(R.id.location8);
+        location[1] = (Spinner) v.findViewById(R.id.location9);
+        location[2] = (Spinner) v.findViewById(R.id.location10);
+        location[3] = (Spinner) v.findViewById(R.id.location11);
+        location[4] = (Spinner) v.findViewById(R.id.location12);
+        location[5] = (Spinner) v.findViewById(R.id.location1);
+        location[6] = (Spinner) v.findViewById(R.id.location2);
+        location[7] = (Spinner) v.findViewById(R.id.location3);
+        location[8] = (Spinner) v.findViewById(R.id.location4);
+
+        sub_spinner[0] = (Spinner) v.findViewById(R.id.spinner8);
+        sub_spinner[1] = (Spinner) v.findViewById(R.id.spinner9);
+        sub_spinner[2] = (Spinner) v.findViewById(R.id.spinner10);
+        sub_spinner[3] = (Spinner) v.findViewById(R.id.spinner11);
+        sub_spinner[4] = (Spinner) v.findViewById(R.id.spinner12);
+        sub_spinner[5] = (Spinner) v.findViewById(R.id.spinner1);
+        sub_spinner[6] = (Spinner) v.findViewById(R.id.spinner2);
+        sub_spinner[7] = (Spinner) v.findViewById(R.id.spinner3);
+        sub_spinner[8] = (Spinner) v.findViewById(R.id.spinner4);
+
+        location_list.add("");
+        location_list.add("B-block");
+        location_list.add("C-block");
+        location_list.add("D-block");
+        location_list.add("E-block");
+        location_list.add("F-block");
+
+        for(int i=0;i<9;i++) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.simple_list_item_1, location_list);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            location[i].setAdapter(adapter);
+        }
+
+        for(int k=0;k<9;k++) {
+            final int finalK = k;
+            location[k].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    location_selected[finalK] = adapterView.getItemAtPosition(i).toString();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        }
+
+
+        gp_fragment = new GP_Fragment();
+        int count = gp_fragment.count;
+        list.add("");
+        try {
+            subjectList = vipulSubject.getData();
+            itrSub = subjectList.iterator();
+            if (!subjectList.isEmpty()) {
+                for (int i = 0; i < count; i++) {
+                    list.add(((String) subjectList.get(i * 3)));
+                }
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        for(int i=0;i<9;i++) {
+            ArrayAdapter<String> adp1 = new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.simple_list_item_1, list);
+            adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            sub_spinner[i].setAdapter(adp1);
+        }
+
+        for(int k=0;k<9;k++) {
+            final int finalK = k;
+            sub_spinner[k].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                @Override
+                public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+                    // TODO Auto-generated method stub
+                    Toast.makeText(getActivity().getBaseContext(), list.get(position), Toast.LENGTH_SHORT).show();
+                    sub_selected[finalK] = arg0.getItemAtPosition(position).toString();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> arg0) {
+                    // TODO Auto-generated method stub
+
+                }
+
+            });
+        }
+
+
         arrayList = vipulHelper.getData();
         itr = arrayList.iterator();
+        String defaultvalue;
         if(!arrayList.isEmpty()) {
             for (int i = 0; i < 9; i++) {
-                tl[i].setText((String) arrayList.get(i*2));
+                defaultvalue = (String) arrayList.get(i * 2 );
+                int index = location_list.indexOf(defaultvalue);
+                if (index != -1)
+                    location[i].setSelection(index);
             }
             for (int i = 0; i < 9; i++) {
-                ts[i].setText((String) arrayList.get(i*2+1));
+                defaultvalue = (String) arrayList.get(i * 2 + 1);
+                int index = list.indexOf(defaultvalue);
+                if (index != -1)
+                    sub_spinner[i].setSelection(index);
             }
         }
         save.setOnClickListener(new View.OnClickListener() {
@@ -63,11 +164,14 @@ public class TuesdayFragment extends Fragment {
                 String subject[] = new String[20];
                 long id[] = new long[20];
                 vipulHelper.checkdb();
-                for(int i=0;i<9;i++) {
-                    room_no[i] = tl[i].getText().toString();
-                    subject[i] = ts[i].getText().toString();
-                    id[i] = vipulHelper.insertData(room_no[i], subject[i]);
-                }
+                try {
+                    for (int i = 0; i < 9; i++) {
+                        //room_no[i] = ml[i].getText().toString();
+                        room_no[i] = location_selected[i];
+                        subject[i] = sub_selected[i];
+                        id[i] = vipulHelper.insertData(room_no[i], subject[i]);
+                    }
+                }catch (Exception e){}
                 int flag = 0;
                 for(int i=0;i<9;i++){
                     if(id[i]<0)
@@ -84,3 +188,6 @@ public class TuesdayFragment extends Fragment {
         return v;
     }
 }
+
+
+

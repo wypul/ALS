@@ -10,6 +10,13 @@
         <item>@drawable/tb</item>
         <item>@mipmap/tt</item>
     </array>
+    <string-array name="location_array">
+        <item>B-block</item>
+        <item>C-block</item>
+        <item>D-block</item>
+        <item>E-block</item>
+        <item>F-block</item>
+    </string-array>
     <string-array name="titles">
         <item>Attendance</item>
         <item>Your Location</item>
@@ -27,6 +34,7 @@
     <item name="fieldCountry" type="id"/>
     <item name="fieldLatitude" type="id"/>
     <item name="fieldLongitude" type="id"/>
+    <item name="graph_container" type="id"/>
     <!-- From: file:/home/vipul/AndroidStudioProjects/ALS/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="GPSAlertDialogMessage"/>
@@ -41,6 +49,7 @@
     <string name="notification">Notify</string>
     <string name="settings"/>
     <string name="title">Title</string>
+    <string name="title_activity_report"/>
     <string name="title_activity_time_table">Time_table</string>
     <!-- From: file:/home/vipul/AndroidStudioProjects/ALS/app/src/main/res/values/styles.xml -->
     <eat-comment/>

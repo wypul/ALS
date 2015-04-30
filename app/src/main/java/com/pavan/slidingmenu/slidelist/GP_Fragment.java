@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.pavan.slidingmenu.MondayFragment;
 import com.pavan.slidingmenu.R;
 import com.pavan.slidingmenu.VipulDatabaseAdapterMonday;
 import com.pavan.slidingmenu.VipulDatabaseAdapterSubject;
@@ -20,13 +21,14 @@ import java.util.Iterator;
 
 @SuppressLint("NewApi") public class GP_Fragment extends Fragment{
 
-    EditText day,time,viewtxt;
+    EditText day,time,viewtxt,showattendance;
     EditText sub[] = new EditText[10];
-    Button button,show;
+    Button button,show,markattendance;
     public final static String subject[] = new String[10];
-    public int count=0;
+    public static int count=0;
     ArrayList arrayList;
     Iterator itr;
+    int dayofweek,hourofday;
     VipulDatabaseAdapterSubject vipulHelper;
 
     @Override
@@ -38,11 +40,12 @@ import java.util.Iterator;
         vipulHelper = new VipulDatabaseAdapterSubject(getActivity().getApplicationContext());
         vipulHelper.initialize();
         Calendar cal = Calendar.getInstance();
-        int dayofweek = cal.get(Calendar.DAY_OF_WEEK);
-        int hourofday = cal.get(Calendar.HOUR_OF_DAY);
+        dayofweek = cal.get(Calendar.DAY_OF_WEEK);
+        hourofday = cal.get(Calendar.HOUR_OF_DAY);
         day=(EditText) rootView.findViewById(R.id.day);
         time=(EditText) rootView.findViewById(R.id.time);
         viewtxt=(EditText) rootView.findViewById(R.id.view);
+        showattendance=(EditText) rootView.findViewById(R.id.viewattendance);
         day.setText(String.valueOf(dayofweek));
         time.setText(String.valueOf(hourofday));
         sub[0] = (EditText) rootView. findViewById(R.id.sub1);
@@ -54,23 +57,27 @@ import java.util.Iterator;
         sub[6] = (EditText) rootView. findViewById(R.id.sub7);
         button = (Button) rootView.findViewById(R.id.save);
         show = (Button) rootView.findViewById(R.id.show);
+        markattendance = (Button) rootView.findViewById(R.id.markattendance);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Button Clicked",Toast.LENGTH_LONG).show();
                 count = 0;
                 for(int i=0;i<10;i++)
                 {
                     if(sub[i]!=null) {
                         subject[i] = sub[i].getText().toString();
-                        count++;
+                     //   count++;
                     }
+                }
+                for(int i=0;i<10;i++)
+                {
+                    if(subject[i]!=null && !subject[i].isEmpty())
+                        count++;
                 }
                 vipulHelper.checkdb();
                 long id [] = new long[10];
                 for(int i=0;i<count;i++)
                     id[i] = vipulHelper.insertData(subject[i],"4","1");
-                Toast.makeText(getActivity(),String.valueOf(count),Toast.LENGTH_LONG).show();
 
             }
         });
@@ -80,7 +87,41 @@ import java.util.Iterator;
                 arrayList = vipulHelper.getData();
                 itr = arrayList.iterator();
                 if(!arrayList.isEmpty()){
-                    viewtxt.setText((String) arrayList.get(6));
+                    viewtxt.setText((String) arrayList.get(1));
+                }
+                String present = (String)arrayList.get(1);
+                present = String.valueOf(Integer.valueOf(present) + 1);
+                try {
+                    vipulHelper.updatePresent(present,"q");
+                    arrayList = vipulHelper.getData();
+                    itr = arrayList.iterator();
+                    //Toast.makeText(getActivity(),(String)arrayList.get(1),Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        markattendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String subject,present;
+                switch (dayofweek) {
+                    case 2:
+                        MondayFragment mondayFragment = new MondayFragment();
+                        //subject = (String)mondayFragment.arrayList.get((hourofday-8)*2+1);
+                        subject = "w";
+                        present = vipulHelper.getPresent(subject);
+                        Toast.makeText(getActivity(),present, Toast.LENGTH_LONG).show();
+                        if(present!=null)
+                            present = String.valueOf(Integer.valueOf(present) + 1);
+                        try {
+                            vipulHelper.updatePresent(present, subject);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(getActivity(),present, Toast.LENGTH_LONG).show();
+                        break;
                 }
             }
         });

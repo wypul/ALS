@@ -3,4 +3,5 @@
     <item name="fieldLatitude" type="id" />
     <item name="fieldLongitude" type="id" />
     <item name="fieldCountry" type="id" />
+    <item name="graph_container" type="id" />
 </resources>
